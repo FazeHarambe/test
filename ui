@@ -1,0 +1,94 @@
+local library = {}
+
+function library:CreateLibrary(text)
+	local MainUI = Instance.new("ScreenGui")
+	local Container = Instance.new("Frame")
+	local TabContainer = Instance.new("Frame")
+	local UIListLayout = Instance.new("UIListLayout")
+	local MainTitle = Instance.new("TextLabel")
+	local Containers = Instance.new("Folder")
+	MainUI.Name = "MainUI"
+	MainUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+	MainUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+	Container.Name = "Container"
+	Container.Parent = MainUI
+	Container.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	Container.BorderColor3 = Color3.fromRGB(25, 25, 25)
+	Container.Position = UDim2.new(0.16538462, 0, 0.172690749, 0)
+	Container.Size = UDim2.new(0, 522, 0, 325)
+
+	TabContainer.Name = "TabContainer"
+	TabContainer.Parent = Container
+	TabContainer.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	TabContainer.BorderColor3 = Color3.fromRGB(30, 30, 30)
+	TabContainer.BorderSizePixel = 0
+	TabContainer.Size = UDim2.new(0, 100, 0, 325)
+
+	UIListLayout.Parent = TabContainer
+	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	MainTitle.Name = "MainTitle"
+	MainTitle.Parent = Container
+	MainTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+	MainTitle.BackgroundTransparency = 1.000
+	MainTitle.Position = UDim2.new(0.417624533, 0, 0, 0)
+	MainTitle.Size = UDim2.new(0, 85, 0, 15)
+	MainTitle.Font = Enum.Font.Gotham
+	MainTitle.Text = text
+	MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+	MainTitle.TextSize = 14.000
+
+	Containers.Name = "Containers"
+	Containers.Parent = Container
+	local InsideLibrary = {}
+	function InsideLibrary:CreateWindow(text)
+		local TabButton = Instance.new("TextButton")
+
+		local Container2 = Instance.new("Frame")
+		TabButton.Name = text
+		TabButton.Parent = TabContainer
+		TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TabButton.BackgroundTransparency = 1.000
+		TabButton.Size = UDim2.new(0, 100, 0, 36)
+		TabButton.Font = Enum.Font.Gotham
+		TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TabButton.TextSize = 14.000
+		TabButton.TextTransparency = 0.300
+        TabButton.Text = text
+
+
+		Container2.Name = text
+		Container2.Parent = Containers
+		Container2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		Container2.BackgroundTransparency = 1.000
+		Container2.Position = UDim2.new(0.191570878, 0, 0, 0)
+		Container2.Size = UDim2.new(0, 422, 0, 325)
+		TabButton.MouseButton1Click:Connect(function()
+			
+			
+			
+			for i,v in next, Containers:GetChildren() do
+				v.Visible = false
+				
+			end
+			
+			for i,v in next, TabContainer:GetChildren() do
+			    if v:IsA("TextButton") then
+			        v.TextTransparency = 0.3
+			    end
+			end
+	    
+			TabButton.TextTransparency = 0
+			Container2.Visible = true
+		end)
+
+		
+		
+	end
+	return InsideLibrary;
+end
+local Main = library:CreateLibrary("Test")
+
+ Main:CreateWindow("Main")
+Main:CreateWindow("Players")
+Main:CreateWindow("Misc")
